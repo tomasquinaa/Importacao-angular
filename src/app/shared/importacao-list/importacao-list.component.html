@@ -1,6 +1,13 @@
 <ul>
     <li *ngFor="let item of importaListComponent">
-        {{item.id}} - {{item.title}}
+        Nome: {{item.nome_completo}} <br>
+        Empresa: {{item.empresa}} <br>
+        Motivo da Visita: {{ item.motivo_visita }} <br>
+        Hora da Chegada: {{ item.data_hora_chegada }} <br>
+        Departamento ou Pessoa Visitado: {{ item.pessoa_departamento_visitado }}
         <br>
+        Hora de Saída: {{ item.data_hora_partida }} <br>
+        Observação: {{ item.observacoes }}
+
     </li>
 </ul>

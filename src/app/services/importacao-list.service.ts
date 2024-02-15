@@ -10,7 +10,7 @@ export class ImportacaoListService {
   public emitEvent = new EventEmitter();
   private listVariavelService: Array<string> = ['X Bacon', 'Feijao', 'Ovo'];
 
-  private url: string = 'https://jsonplaceholder.typicode.com';
+  private url: string = 'http://localhost:8000/api';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -19,10 +19,12 @@ export class ImportacaoListService {
   // }
 
   public importacaoListService(): Observable<Array<ImportaList>> {
-    return this.httpClient.get<Array<ImportaList>>(`${this.url}/posts`).pipe(
-      (res) => res,
-      (error) => error
-    );
+    return this.httpClient
+      .get<Array<ImportaList>>(`${this.url}/agendamentos`)
+      .pipe(
+        (res) => res,
+        (error) => error
+      );
   }
 
   // public importaListAdd(value: string) {
@@ -30,12 +32,16 @@ export class ImportacaoListService {
   //   return this.listVariavelService.push(value);
   // }
 
-  public importaListAdd(value: string) {
-    this.importaListAlert(value);
-    return this.listVariavelService.push(value);
+  public importaListAdd(value: string): Observable<Array<ImportaList>> {
+    return this.httpClient
+      .post<Array<ImportaList>>(`${this.url}/posts`, { title: value })
+      .pipe(
+        (res) => res,
+        (error) => error
+      );
   }
 
-  public importaListAlert(value: string) {
+  public importaListAlert(value: ImportaList) {
     return this.emitEvent.emit(value);
   }
 }

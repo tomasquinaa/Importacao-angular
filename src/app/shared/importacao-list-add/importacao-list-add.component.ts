@@ -12,6 +12,9 @@ export class ImportacaoListAddComponent implements OnInit {
   ngOnInit(): void {}
 
   public listAddItem(value: string) {
-    return this.importaListService.importaListAdd(value);
+    return this.importaListService.importaListAdd(value).subscribe(
+      (res) => res,
+      (error) => error
+    );
   }
 }
